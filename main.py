@@ -1,6 +1,7 @@
 import pygame
 import sys
 import random
+import time
 from pygame.locals import *
 
 pygame.init()
@@ -9,17 +10,19 @@ WINDOW_SIZE = (1200, 800)
 screen = pygame.display.set_mode(WINDOW_SIZE)
 display = pygame.Surface(WINDOW_SIZE)
 
-amount_numbers = 75
+delay = 0 #Interval (in seconds) added between each check. Increase to slow down the program. 0 by default
+amount_numbers = 75 #amount of bars to be shown
+
+# Create variables
 numbers = []
+bars = []
+low_search = 0
+high_search = 1
+
 # Generate random numbers
 for i in range(amount_numbers):
     numbers.append(random.randint(5, WINDOW_SIZE[1] - 50))
 sorted_numbers = sorted(numbers)
-
-# Create variables
-bars = []
-low_search = 0
-high_search = 1
 
 class Bar():
     def __init__(self, value, x, y, width, color = (0, 0, 0)):
@@ -63,6 +66,7 @@ def bubble_sort():
             swap_items(bars, low_search, high_search)
             low_search += 1
             high_search += 1
+            time.sleep(delay)
         else:
             low_search += 1
             high_search += 1
